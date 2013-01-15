@@ -51,7 +51,7 @@ class kaoGMATDBWriterPipeline(object):
             correct_rate = question['correct_rate'][0]
 
         try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gmatclub', charset='utf8')
+            conn = MySQLdb.connect(host='localhost', user='root', passwd='nameLR9969', db='gmatclub', charset='utf8')
         except Exception, e:
             print e
 
@@ -90,7 +90,7 @@ class kaoGMATDBWriterPipeline(object):
         compound_question_id = str.join(compound_question['sub_questions'],'-')
         
         try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gmatclub', charset='utf8')
+            conn = MySQLdb.connect(host='localhost', user='root', passwd='nameLR9969', db='gmatclub', charset='utf8')
         except Exception, e:
             print e
             
@@ -122,7 +122,7 @@ class kaoGMATDBWriterPipeline(object):
         conn.close()
     def insert_argument(self,argument):
         try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gmatclub', charset='utf8')
+            conn = MySQLdb.connect(host='localhost', user='root', passwd='nameLR9969', db='gmatclub', charset='utf8')
         except Exception,e:
             print e
         
@@ -145,7 +145,7 @@ class kaoGMATDBWriterPipeline(object):
         conn.close()
     def exists(self, question_id):
         try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gmatclub', charset='utf8')
+            conn = MySQLdb.connect(host='localhost', user='root', passwd='nameLR9969', db='gmatclub', charset='utf8')
         except Exception, e:
             print e
             
@@ -163,7 +163,7 @@ class kaoGMATDBWriterPipeline(object):
         return exist
     def insert_or_update_relationship(self, compound_question_id, sub_question_id):
         try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gmatclub', charset='utf8')
+            conn = MySQLdb.connect(host='localhost', user='root', passwd='nameLR9969', db='gmatclub', charset='utf8')
         except Exception,e:
             print e
         
