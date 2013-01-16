@@ -105,35 +105,43 @@ class kaoGMATDBWriterPipeline(object):
         set = self.get_set(compound_question)
         rating = self.get_rating(compound_question)
         correct_rate = self.get_correct_rate(compound_question)
-        compound_question_id = string.join(compound_question['sub_questions'],'-')
+        
+        compound_question_id = None
+        try:
+            compound_question_id = string.join(compound_question['sub_questions'],'-')
+        except Exception,e:
+            print e
         
         try:
             conn = MySQLdb.connect(host='localhost', user='root', passwd=DB_PASSWORD, db='gmatclub', charset='utf8')
         except Exception, e:
             print e
-            
-        try:
-            cursor = conn.cursor()
-            if not self.exists(compound_question_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, content, is_compound, is_sub) values(%s, %s, %s, %s, 1, 0)', (compound_question_id, type, set, self.get_article(compound_question)))
-                conn.commit()
-            else:
-                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, content=%s, is_compound=1, is_sub=0 where kaogmat_id=%s', (type, set, self.get_article(compound_question), compound_question_id))
-                conn.commit()
-        except Exception,e:
-            print e
+         
+        if compound_question_id is not None:  
+            try:
+                cursor = conn.cursor()
+                if not self.exists(compound_question_id):
+                    cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, content, is_compound, is_sub) values(%s, %s, %s, %s, 1, 0)', (compound_question_id, type, set, self.get_article(compound_question)))
+                    conn.commit()
+                else:
+                    cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, content=%s, is_compound=1, is_sub=0 where kaogmat_id=%s', (type, set, self.get_article(compound_question), compound_question_id))
+                    conn.commit()
+            except Exception,e:
+                print e
         
-        try:
-            cursor = conn.cursor()
-            if not self.exists(kaogmat_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 1, %s)', (kaogmat_id, type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate))
-                conn.commit()
-            else:
-                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=1, correct_rate=%s where kaogmat_id=%s', (type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate, kaogmat_id))
-                conn.commit()
-            self.insert_or_update_relationship(compound_question_id, kaogmat_id)
-        except Exception, e:
-            print e
+            try:
+                cursor = conn.cursor()
+                if not self.exists(kaogmat_id):
+                    cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 1, %s)', (kaogmat_id, type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate))
+                    conn.commit()
+                else:
+                    cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=1, correct_rate=%s where kaogmat_id=%s', (type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate, kaogmat_id))
+                    conn.commit()
+                self.insert_or_update_relationship(compound_question_id, kaogmat_id)
+            except Exception, e:
+                print e
+        else:
+            self.insert_question(compound_question)
         
         cursor.close()
         conn.close()
