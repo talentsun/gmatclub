@@ -25,33 +25,62 @@ class kaoGMATDBWriterPipeline(object):
         else:
             self.insert_question(item)
         return item
+    def get_type(self, item):
+        type = 'other'
+        try:
+            type = item['type'][0]
+        except Exception,e:
+            print e
+        return type
+    def get_set(self, item):
+        set = 'other'
+        try:
+            set = item['set'][0]
+        except Exception,e:
+            print e
+        return set
+    def get_rating(self, item):
+        rating = '0.0'
+        try:
+            rating = item['rating'][0]
+        except Exception,e:
+            print e
+        return rating
+    def get_correct_rate(self, item):
+        correct_rate = '0.0'
+        try:
+            correct_rate = item['correct_rate'][0]
+        except Exception,e:
+            print e
+        return correct_rate
+    def get_answer(self, item):
+        answer = ''
+        try:
+            answer = item['answer'][0]
+        except Exception,e:
+            print e
+        return answer
+    def get_explaination(self, item):
+        explaination = ''
+        try:
+            explaination = item['explaination'][0]
+        except Exception,e:
+            print e
+        return explaination
+    def get_id(self, item):
+        return item['id'][0]
+    def get_content(self, item):
+        return item['content'][0]
+    def get_article(self, item):
+        return item['article'][0]
+    def get_essay(self, item):
+        return item['essay'][0]
     def insert_question(self, question):
-        kaogmat_id = question['id'][0]
-        print 'question #%s' % (kaogmat_id)
-
-        type = question['type']
-        if type is None:
-            type = 'other'
-        else:
-            type = question['type'][0]
-
-        set = question['set']
-        if set is None:
-            set = 'other'
-        else:
-            set = question['set'][0]
-
-        rating = question['rating']
-        if rating is None:
-            rating = '0.0'
-        else:
-            rating = question['rating'][0]
-
-        correct_rate = question['correct_rate']
-        if correct_rate is None:
-            correct_rate = '0.0'
-        else:
-            correct_rate = question['correct_rate'][0]
+        kaogmat_id = self.get_id(question)
+        type = self.get_type(question)
+        set = self.get_set(question)
+        rating = self.get_rating(question)
+        correct_rate = self.get_correct_rate(question)
 
         try:
             conn = MySQLdb.connect(host='localhost', user='root', passwd=DB_PASSWORD, db='gmatclub', charset='utf8')
@@ -61,43 +90,21 @@ class kaoGMATDBWriterPipeline(object):
         try:
             cursor = conn.cursor()
             if not self.exists(kaogmat_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 0, %s)', (kaogmat_id, type, set, rating, question['content'][0], question['answer'][0], question['explaination'][0], correct_rate))
+                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 0, %s)', (kaogmat_id, type, set, rating, self.get_content(question), self.get_answer(question), self.get_explaination(question), correct_rate))
                 conn.commit()
             else:
-                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=0, correct_rate=%s where kaogmat_id=%s', (type, set, rating, question['content'][0], question['answer'][0], question['explaination'][0], correct_rate, kaogmat_id))
+                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=0, correct_rate=%s where kaogmat_id=%s', (type, set, rating, self.get_content(question), self.get_answer(question), self.get_explaination(question), correct_rate, kaogmat_id))
                 conn.commit()
         except Exception,e:
             print e
         cursor.close()
         conn.close()
     def insert_compound_question(self, compound_question):
-        kaogmat_id = compound_question['id'][0]
-        print 'compound question #%s' % (kaogmat_id)
-
-        type = compound_question['type']
-        if type is None:
-            type = 'other'
-        else:
-            type = compound_question['type'][0]
-
-        set = compound_question['set']
-        if set is None:
-            set = 'other'
-        else:
-            set = compound_question['set'][0]
-
-        rating = compound_question['rating']
-        if rating is None:
-            rating = 0.0
-        else:
-            rating = compound_question['rating'][0]
-
-        correct_rate = compound_question['correct_rate']
-        if correct_rate is None:
-            correct_rate = 0.0
-        else:
-            correct_rate = compound_question['correct_rate'][0]
-        
+        kaogmat_id = self.get_id(compound_question)
+        type = self.get_type(compound_question)
+        set = self.get_set(compound_question)
+        rating = self.get_rating(compound_question)
+        correct_rate = self.get_correct_rate(compound_question)
         compound_question_id = string.join(compound_question['sub_questions'],'-')
         
         try:
@@ -108,39 +115,21 @@ class kaoGMATDBWriterPipeline(object):
         try:
             cursor = conn.cursor()
             if not self.exists(compound_question_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, content, is_compound, is_sub) values(%s, %s, %s, %s, 1, 0)', (compound_question_id, type, set, compound_question['article'][0]))
+                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, content, is_compound, is_sub) values(%s, %s, %s, %s, 1, 0)', (compound_question_id, type, set, self.get_article(compound_question)))
                 conn.commit()
             else:
-                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, content=%s, is_compound=1, is_sub=0 where kaogmat_id=%s', (type, set, compound_question['article'][0], compound_question_id))
+                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, content=%s, is_compound=1, is_sub=0 where kaogmat_id=%s', (type, set, self.get_article(compound_question), compound_question_id))
                 conn.commit()
         except Exception,e:
             print e
-
-        content = compound_question['content']
-        if content is None:
-            content = ''
-        else:
-            content = compound_question['content'][0]
-            
-        answer = compound_question['answer']
-        if answer is None:
-            answer = ''
-        else:
-            answer = compound_question['answer'][0]
-            
-        explaination = compound_question['explaination']
-        if explaination is None:
-            explaination = ''
-        else:
-            explaination = compound_question['explaination'][0]
         
         try:
             cursor = conn.cursor()
             if not self.exists(kaogmat_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 1, %s)', (kaogmat_id, type, set, rating, content, answer, explaination, correct_rate))
+                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, type, `set`, rating, content, answer, explaination, is_compound, is_sub, correct_rate) values(%s, %s, %s, %s, %s, %s, %s, 0, 1, %s)', (kaogmat_id, type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate))
                 conn.commit()
             else:
-                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=1, correct_rate=%s where kaogmat_id=%s', (type, set, rating, content, answer, explaination, correct_rate, kaogmat_id))
+                cursor.execute('update RAW_kaoGMAT_Questions set type=%s, `set`=%s, rating=%s, content=%s, answer=%s, explaination=%s, is_compound=0, is_sub=1, correct_rate=%s where kaogmat_id=%s', (type, set, rating, self.get_content(compound_question), self.get_answer(compound_question), self.get_explaination(compound_question), correct_rate, kaogmat_id))
                 conn.commit()
             self.insert_or_update_relationship(compound_question_id, kaogmat_id)
         except Exception, e:
@@ -154,31 +143,21 @@ class kaoGMATDBWriterPipeline(object):
         except Exception,e:
             print e
         
-        kaogmat_id = argument['id'][0]
-        
-        rating = argument['rating']
-        if rating is None:
-            rating = 0.0
-        else:
-            rating = argument['rating'][0]
-        
-        essay = argument['essay']
-        if essay is None:
-            essay = ''
-        else:
-            essay = argument['essay'][0]
-        
+        kaogmat_id = self.get_id(argument)
+        rating = self.get_rating(argument)
+        essay = self.get_essay(argument)
+
         try:
             cursor = conn.cursor()
             if not self.exists(kaogmat_id):
-                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, rating, content) values(%s, %s, %s)', (kaogmat_id, rating, essay))
+                cursor.execute('insert into RAW_kaoGMAT_Questions(kaogmat_id, rating, content, type) values(%s, %s, %s, \'Analytics Writing of Argument\')', (kaogmat_id, rating, essay))
                 conn.commit()
             else:
-                cursor.execute('update RAW_kaoGMAT_Questions set rating=%s, content=%s where kaogmat_id=%s', (rating, essay, kaogmat_id))
+                cursor.execute('update RAW_kaoGMAT_Questions set rating=%s, content=%s, type=%s where kaogmat_id=%s', (rating, essay, 'Analytics Writing of Argument', kaogmat_id))
                 conn.commit()
         except Exception, e:
             print e
-        
+
         cursor.close()
         conn.close()
     def exists(self, question_id):
