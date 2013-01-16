@@ -19,7 +19,7 @@ class Question(Item):
 #IR and RC
 class CompoundQuestion(Question):
     article = Field()
-    sliding_questions = Field()
+    sub_questions = Field()
 
 #AWA
 class Argument(Item):
