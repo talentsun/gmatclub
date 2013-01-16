@@ -30,7 +30,7 @@ class KaogmatSpider(CrawlSpider):
         loader.add_xpath('content', '//div[@id="QuestionContent"]')
         loader.add_xpath('answer', '//div[@class="answer clearfix hidden QuesHidden"]/b/text()')
         loader.add_xpath('explaination', '//div[@id="DivExplain"]')
-        loader.add_xpath('correct_rate', '//div[@class="w-stat hidden QuesHidden"]/div[@class="info"]/b/text()')
+        loader.add_xpath('correct_rate', '//div[@class="info"]/b/text()')
         return loader.load_item()
     def parse_compound_question(self, response):
         loader = XPathItemLoader(item=CompoundQuestion(), response=response)
@@ -45,9 +45,9 @@ class KaogmatSpider(CrawlSpider):
         loader.add_xpath('content', '//div[@id="QuestionContent"]')
         loader.add_xpath('answer', '//div[@class="answer clearfix hidden QuesHidden"]/b/text()')
         loader.add_xpath('explaination', '//div[@id="DivExplain"]')
-        loader.add_xpath('correct_rate', '//div[@class="w-stat hidden QuesHidden"]/div[@class="info"]/b/text()')
+        loader.add_xpath('correct_rate', '//div[@class="info"]/b/text()')
         loader.add_xpath('article', '//div[@class="article rt"]')
-        loader.add_xpath('sliding_questions', '//div[@class="title"]/h1/*[position()>1]/text()')
+        loader.add_xpath('sub_questions', '//div[@class="title"]/h1/*[position()>1]/text()')
         return loader.load_item()
     def parse_argument(self, response):
         loader = XPathItemLoader(item=Argument(), response=response)
