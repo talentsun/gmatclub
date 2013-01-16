@@ -1,1 +1,9 @@
+#ignore metadata
+.metadata
+.gitignore
+
+#ignore tmp files
 *.swp
+
+#ignore pyc
+*.pyc
