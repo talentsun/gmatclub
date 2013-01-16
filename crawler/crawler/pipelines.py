@@ -111,13 +111,13 @@ class kaoGMATDBWriterPipeline(object):
             compound_question_id = string.join(compound_question['sub_questions'],'-')
         except Exception,e:
             print e
-        
-        try:
-            conn = MySQLdb.connect(host='localhost', user='root', passwd=DB_PASSWORD, db='gmatclub', charset='utf8')
-        except Exception, e:
-            print e
          
-        if compound_question_id is not None:  
+        if compound_question_id is not None:
+            try:
+                conn = MySQLdb.connect(host='localhost', user='root', passwd=DB_PASSWORD, db='gmatclub', charset='utf8')
+            except Exception, e:
+                print e
+
             try:
                 cursor = conn.cursor()
                 if not self.exists(compound_question_id):
@@ -140,11 +140,11 @@ class kaoGMATDBWriterPipeline(object):
                 self.insert_or_update_relationship(compound_question_id, kaogmat_id)
             except Exception, e:
                 print e
+            
+            cursor.close()
+            conn.close()
         else:
             self.insert_question(compound_question)
-        
-        cursor.close()
-        conn.close()
     def insert_argument(self,argument):
         try:
             conn = MySQLdb.connect(host='localhost', user='root', passwd=DB_PASSWORD, db='gmatclub', charset='utf8')
