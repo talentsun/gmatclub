@@ -14,7 +14,7 @@ class KaogmatSpider(CrawlSpider):
         Rule(SgmlLinkExtractor(allow=r'/(sc|cr|ps|ds)/\d+\.html'), callback='parse_question', follow=False),
         Rule(SgmlLinkExtractor(allow=r'/(rc|ir)/\d+\.html'), callback='parse_compound_question', follow=False),
         Rule(SgmlLinkExtractor(allow=r'/awa/\d+\.html'), callback='parse_argument', follow=False),
-        Rule(SgmlLinkExtractor(allow=r'/question\?p=\d+'), callback=None, follow=True),
+        Rule(SgmlLinkExtractor(allow=r'/(question|sc|cr|ps|ds|rc|ir|awa)\?p=\d+'), callback=None, follow=True),
     )
 
     def parse_question(self, response):
