@@ -8,8 +8,9 @@ import re
 class KaogmatSpider(CrawlSpider):
     name = 'kaogmat'
     allowed_domains = ['kaogmat.com']
-    start_urls = ['http://www.kaogmat.com/cr/','http://www.kaogmat.com/rc/','http://www.kaogmat.com/ps/','http://www.kaogmat.com/ds/','http://www.kaogmat.com/ir/','http://www.kaogmat.com/awa/']
-
+    #start_urls = ['http://www.kaogmat.com/cr/','http://www.kaogmat.com/rc/','http://www.kaogmat.com/ps/','http://www.kaogmat.com/ds/','http://www.kaogmat.com/ir/','http://www.kaogmat.com/awa/']
+    start_urls = ['http://www.kaogmat.com/sc/']
+    
     rules = (
         Rule(SgmlLinkExtractor(allow=r'/(sc|cr|ps|ds)/\d+\.html'), callback='parse_question', follow=False),
         Rule(SgmlLinkExtractor(allow=r'/(rc|ir)/\d+\.html'), callback='parse_compound_question', follow=False),
