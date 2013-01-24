@@ -1,0 +1,24 @@
+<div class="question" id="question_4627">
+    A "Sophie Germain" prime is any positive prime number p for which 2p + 1 is also prime. The product of all the possible units digits of Sophie Germain primes greater than 5 is
+    <div><input class="option" type="radio" name=" question_4627" value="A."/><b>A.</b><span>3</span></div>
+    <div><input class="option" type="radio" name=" question_4627" value="B."/><b>B.</b><span>7</span></div>
+    <div><input class="option" type="radio" name=" question_4627" value="C."/><b>C.</b><span>21</span></div>
+    <div><input class="option" type="radio" name=" question_4627" value="D."/><b>D.</b><span>27</span></div>
+    <div><input class="option" type="radio" name=" question_4627" value="E."/><b>E.</b><span>189</span></div>
+    <input class="c-option" type="hidden" name=" question_4627" value="D"/>
+    <div class="explanation" style="display:none"><p>题目问的是 这些SG质数的个位数有多少种可能情况，这些可能情况的乘积是多少。</p>
+<p><span>"Sophie Germain" prime的概念：p和2p + 1都是质数，这里只有p是"Sophie Germain" prime。所以我们从p的个位数以及2p+1的个位数切入。</span></p>
+<p>解题思路是：一个SG质数p可以推出2p+1是另一个质数，而且p是大于5的，那么</p>
+<p>2p+1的个位数只可能是1 3 7 9 因为尾数是5的不可能是质数</p>
+<p>并且，若一个SG质数p的尾数是7，则2p+1的尾数是5，不可能是质数，所以p的尾数也不能是7</p>
+<p>所以SG质数p的尾数有可能是 1 3 9</p>
+<p>那么接下来要做的就是排除不可能的情况。由于</p>
+<p>11 -&gt; 23</p>
+<p>23 -&gt; 47</p>
+<p>一下子推出了1 3 都是可能的，(注意由于只有P是符合条件的SG质数，所以23 -&gt; 47只能证明3是一种possible instance, 不能证明7.) 所以只需要想9的例子。</p>
+<p>这个题目的难点就在于需要找到 29 -&gt; 59 这个坑爹的例子</p>
+<p>这样一来，1 3 9 都出现了 所以答案选D</p>
+<p>给一个链接，是解释这种数的。注意引用给出的safe prime的定义看上去和本题不同，其实是一回事。http://en.wikipedia.org/wiki/Safe_prime</p>
+<p>感谢ExtraLozt对我解法的复查和修改！</p>
+<p></p></div>
+</div>

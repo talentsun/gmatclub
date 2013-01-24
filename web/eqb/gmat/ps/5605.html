@@ -1,0 +1,21 @@
+<div class="question" id="question_5605">
+    For every positive even integer n, the function h(n) is defined to be the product of all the even integers from 2 to n, inclusive.  If p is the smallest prime factor of h(100) + 1, then p is
+    <div><input class="option" type="radio" name=" question_5605" value="A."/><b>A.</b><span>between 2 and 10</span></div>
+    <div><input class="option" type="radio" name=" question_5605" value="B."/><b>B.</b><span>between 10 and 20</span></div>
+    <div><input class="option" type="radio" name=" question_5605" value="C."/><b>C.</b><span>between 20 and 30</span></div>
+    <div><input class="option" type="radio" name=" question_5605" value="D."/><b>D.</b><span>between 30 and 40</span></div>
+    <div><input class="option" type="radio" name=" question_5605" value="E."/><b>E.</b><span>greater than 40</span></div>
+    <input class="c-option" type="hidden" name=" question_5605" value="E"/>
+    <div class="explanation" style="display:none"><p>因为h(n)+1 = 2*4*…*n +1 = 2^(n/2) * (1*2*3*4*…*n/2) + 1</p>
+<p>设S = 2^(n/2) * (1*2*3*4*…*n/2)</p>
+<p>显然S是2，3，5，7，…, n的倍数</p>
+<p>这里拿3做个例子，S肯定能表示成3k （其中k为正整数），那么</p>
+<p>h(n)+1 = 3k+1 必然不是3的倍数，那么同理S也能表示成5k，7k，…, nk等形式，所以h（n）+1也同样可以表示成5k+1, 7k+1,…, (n/2)k+1,所以h(n)+1也不是5，7，…,n/2等的倍数</p>
+<p>综上，h(100)+1不是3，5，7，…, 41, 47的倍数，所以选E</p>
+<p>---<span>kyongxu</span></p>
+<p>h(100)=（1X2X3X...X50）X2^50<br>最后得到的数，一定是50以内任意一个数的倍数，这个数+1以后，不可能还能 <br>除得尽之前的那个数，所以这个数不可能在50以内。</p>
+<p>---extralozt</p>
+<p></p>
+<p><span>f(100)+1= (2 x 1) x (2 x 2) x (2 x 3) x ... x (2 x 50)+1</span><br><br><span>1,2，3,4,5，6 。。。50 都不是 f(100)+1的factors</span><br><br><span>所以 smallest prime factor 比大于47</span></p>
+<p><span><span>--- </span><span>flyingbunny</span><br></span></p></div>
+</div>
