@@ -1,0 +1,10 @@
+<div class="question" id="question_{0}">
+    {1}
+    <div><input class="option" type="radio" name=" question_{2}" value="{3}"/><b>{4}</b><span>{5}</span></div>
+    <div><input class="option" type="radio" name=" question_{6}" value="{7}"/><b>{8}</b><span>{9}</span></div>
+    <div><input class="option" type="radio" name=" question_{10}" value="{11}"/><b>{12}</b><span>{13}</span></div>
+    <div><input class="option" type="radio" name=" question_{14}" value="{15}"/><b>{16}</b><span>{17}</span></div>
+    <div><input class="option" type="radio" name=" question_{18}" value="{19}"/><b>{20}</b><span>{21}</span></div>
+    <input class="c-option" type="hidden" name=" question_{22}" value="{23}"/>
+    <div class="explanation" style="display:none">{24}</div>
+</div>

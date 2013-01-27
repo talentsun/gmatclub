@@ -1,0 +1,27 @@
+<div class="question" id="question_{0}">
+    {1}
+    <div id="question_{2}_1" class="sub-question">
+        <select name=" question_{3}_1">
+        	<option value="unselect">select..</option>
+        	<option class="option" value="A">{4}</option>
+        	<option class="option" value="B">{5}</option>
+        	<option class="option" value="C">{6}</option>
+            <option class="option" value="D">{7}</option>
+            <option class="option" value="E">{8}</option>
+        </select>
+        <input class="c-option" name="question_{9}_1" type="hidden" value="{10}"/>
+    </div>
+    {11}
+    <div id="question_{12}_1" class="sub-question">
+        <select name=" question_{13}_2">
+        	<option value="unselect">select..</option>
+        	<option class="option" value="A">{14}</option>
+        	<option class="option" value="B">{15}</option>
+        	<option class="option" value="C">{16}</option>
+            <option class="option" value="B">{17}</option>
+            <option class="option" value="C">{18}</option>
+        </select>
+        <input class="c-option" name="question_{19}_2" type="hidden" value="{20}"/>
+    </div>
+    <div class="explanation" style="display:none">{21}</div>
+</div>

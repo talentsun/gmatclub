@@ -1,0 +1,16 @@
+<div class="compound-question">
+    <div class=”article”>
+        {0}
+    </div>
+    <div class="question" id="question_{1}">
+    	<div class="question" id = id="question_{2}">
+    	       {3}
+    	</div>
+      	<div><input class="option" type="radio" name=" question_{4}" value="{5}"/><b>{6}</b><span>{7}</span></div>
+    	<div><input class="option" type="radio" name=" question_{8}" value="{9}"/><b>{10}</b><span>{11}</span></div>
+    	<div><input class="option" type="radio" name=" question_{12}" value="{13}"/><b>{14}</b><span>{15}</span></div>
+	    <div><input class="option" type="radio" name=" question_{16}" value="{17}"/><b>{18}</b><span>{19}</span></div>
+	    <div><input class="option" type="radio" name=" question_{20}" value="{21}"/><b>{22}</b><span>{23}</span></div>
+	    <input class="c-option" type="hidden" name=" question_{24}" value="{25}"/>
+    </div>
+</div>

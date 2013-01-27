@@ -1,0 +1,18 @@
+<div class="question" id="question_{0}">
+    {1}
+    <div class="sub-question" id="question_{2}_1">
+        <input class="c-option" type="hidden" name=" question_{3}_1" value="{4}" />
+    </div>
+    <div class="sub-question" id=" question_{5}_2">
+        <input class="c-option" type="hidden" name=" question_{6}_2" value="{7}" />
+    </div>
+    <table>
+        <tr>
+            <td>{8}</td>
+            <td>{9}</td>
+            <td></td>
+        </tr>
+        {10}
+    </table>
+    <div class="explanation" style="display:none">{11}</div>
+<div>

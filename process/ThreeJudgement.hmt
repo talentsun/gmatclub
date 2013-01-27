@@ -1,0 +1,24 @@
+<div class="question" id="question_{0}">
+    {1}
+    <div>Yes  No</div>
+    <div class="sub-question" id="question_{2}_1">
+        <input class="option" type="radio" name=" question_{3}_1" value="YES" />
+        <input class="option" type="radio" name=" question_{4}_1" value="NO" />
+        <input class="c-option" type="hidden" name=" question_{5}_1" value="YES" />
+        <span>{6}</span>
+    </div>
+    <div class="sub-question" id="question_{7}_2">
+        <input class="option" type="radio" name=" question_{8}_2" value="YES" />
+        <input class="option" type="radio" name=" question_{9}_2" value="NO" />
+        <input class="c-option" type="hidden" name=" question_{10}_2" value="YES" />
+        <span>{11}</span>
+    </div>
+    <div class="sub-question" id="question_{12}_3">
+        <input class="option" type="radio" name=" question_{13}_3" value="YES" />
+        <input class="option" type="radio" name=" question_{14}_3" value="NO" />
+        <input class="c-option" type="hidden" name=" question_{15}_3" value="YES" />
+        <span>{16}</span>
+    </div>
+    <div class="explanation" style = "display:none">{17}</div>
+</div>
+
